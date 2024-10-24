@@ -6,14 +6,15 @@ use App\Models\Menu;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 
-class MenuController extends Controller
+class MenuController extends Controller                                                                                                                             
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $menu=Menu::all();
+        return $menu;
     }
 
     /**
@@ -29,7 +30,15 @@ class MenuController extends Controller
      */
     public function store(StoreMenuRequest $request)
     {
-        //
+        $menu=new Menu;
+        $menu->name=$request->name;
+        $menu->price=$request->price;
+        $menu->description=$request->description;
+        $menu->category_id=$request->category_id;
+        $menu->offers=$request->offers;
+        $menu->allergens=$request->allergens;
+        $menu->save();
+        return $menu;
     }
 
     /**
@@ -53,7 +62,18 @@ class MenuController extends Controller
      */
     public function update(UpdateMenuRequest $request, Menu $menu)
     {
-        //
+        $menu=Menu::find($request->id);
+    
+        $menu->name=$request->name;
+        $menu->price=$request->price;
+        $menu->description=$request->description;
+        $menu->category_id=$request->category_id;
+        $menu->offers=$request->offers;
+        $menu->allergens=$request->allergens;
+
+        $menu->save();
+
+        return $menu;
     }
 
     /**
