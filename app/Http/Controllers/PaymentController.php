@@ -44,7 +44,7 @@ class PaymentController extends Controller
        //send mail
        $user = User::find($request->user_id);
        $user->notify(new SendPaymentEmail($user,$payment));
-       
+
        return $payment;
 
     }
